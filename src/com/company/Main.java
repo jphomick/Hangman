@@ -14,6 +14,7 @@ public class Main {
         int guesses = 6;
         String word = words[new Random().nextInt(words.length)];
         ArrayList<String> set = new ArrayList<>();
+        ArrayList<String> used = new ArrayList<>();
 
         for (int i = 0; i < word.length(); i++) {
             set.add("_");
@@ -22,6 +23,10 @@ public class Main {
         while (guesses > 0 && set.indexOf("_") != -1) {
             for (int i = 0; i < word.length(); i++) {
                 System.out.print(set.get(i) + " ");
+            }
+            System.out.print("\nGuessed letters: ");
+            for (int i = 0; i < used.size(); i++) {
+                System.out.print(used.get(i) + " ");
             }
             System.out.println("\nGuesses left: " + guesses + "\nEnter a letter: ");
             String letter = read.nextLine().toLowerCase();
@@ -36,6 +41,10 @@ public class Main {
                 } else {
                     System.out.println("Wrong guess!");
                     guesses--;
+                }
+
+                if (!used.contains(letter)) {
+                    used.add(letter);
                 }
             } else if (letter.toLowerCase().equals(word)) {
                 break;
